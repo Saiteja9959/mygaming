@@ -1,14 +1,15 @@
+version: "3.8"
+
 services:
   mygamingapplication:
-    build: .
-    container_name: mygamingapplication
+    image: YOUR_DOCKERHUB_USERNAME/mygaming:latest
     ports:
       - "5000:5000"
     environment:
-      SECRET_KEY: ${SECRET_KEY:-change-this-before-deployment}
-      GAME_DB: /app/data/games.db
-    volumes:
-      - game-data:/app/data
-    restart: unless-stopped
-volumes:
-  game-data:
+      - FLASK_ENV=production
+    networks:
+      - mygaming_network
+
+networks:
+  mygaming_network:
+    driver: overlay
