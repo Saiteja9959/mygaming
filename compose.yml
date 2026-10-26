@@ -1,0 +1,14 @@
+services:
+  mygamingapplication:
+    build: .
+    container_name: mygamingapplication
+    ports:
+      - "5000:5000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY:-change-this-before-deployment}
+      GAME_DB: /app/data/games.db
+    volumes:
+      - game-data:/app/data
+    restart: unless-stopped
+volumes:
+  game-data:
